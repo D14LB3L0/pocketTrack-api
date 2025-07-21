@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PocketTrack.Application\PocketTrack.Application.csproj" />
+    <ProjectReference Include="..\PocketTrack.Infrastructure\PocketTrack.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
