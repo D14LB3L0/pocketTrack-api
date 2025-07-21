@@ -19,5 +19,7 @@ public partial class Expense
 
     public DateTime? UpdatedAt { get; set; }
 
+    public DateOnly SpentAt { get; set; }
+
     public virtual ExpenseType ExpenseType { get; set; } = null!;
 }

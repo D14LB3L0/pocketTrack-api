@@ -1,4 +1,5 @@
-﻿using PocketTrack.Domain.Entities.Expenses;
+﻿using PocketTrack.Domain.Entities.Expense.ValueObjects;
+using PocketTrack.Domain.Entities.Expenses;
 
 namespace PocketTrack.Infrastructure.Mappers
 {
@@ -9,9 +10,10 @@ namespace PocketTrack.Infrastructure.Mappers
             return new Expense
             {
                 Id = model.Id,
-                Description = model.Description,
-                Amount = model.Amount,
+                Description = new ExpenseDescription(model.Description),
+                Amount = new ExpenseAmount(model.Amount),
                 ExpenseTypeId = model.ExpenseTypeId,
+                SpentAt = model.SpentAt,
                 CreatedAt = model.CreatedAt,
                 UpdatedAt = model.UpdatedAt,
                 IsDeleted = model.IsDeleted,
@@ -21,14 +23,16 @@ namespace PocketTrack.Infrastructure.Mappers
             };
         }
 
+
         public static Persistence.Models.Expense ToModel(Expense entity)
         {
             return new Persistence.Models.Expense
             {
                 Id = entity.Id,
-                Description = entity.Description,
-                Amount = entity.Amount,
+                Description = entity.Description.Value,
+                Amount = entity.Amount.Value,
                 ExpenseTypeId = entity.ExpenseTypeId,
+                SpentAt = entity.SpentAt,
                 CreatedAt = entity.CreatedAt,
                 UpdatedAt = entity.UpdatedAt,
                 IsDeleted = entity.IsDeleted

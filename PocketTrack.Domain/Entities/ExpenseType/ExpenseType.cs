@@ -1,12 +1,10 @@
-﻿namespace PocketTrack.Domain.Entities.ExpenseTypes
-{
-    using PocketTrack.Domain.Entities.Expenses;
+﻿using PocketTrack.Domain.Entities.ExpenseType.ValueObjects;
 
+namespace PocketTrack.Domain.Entities.ExpenseTypes
+{
     public class ExpenseType
     {
         public int Id { get; set; }
-        public string Name { get; set; } = string.Empty;
-
-        public ICollection<Expense>? Expenses { get; set; }
+        public required ExpenseTypeName Name { get; set; }
     }
 }
