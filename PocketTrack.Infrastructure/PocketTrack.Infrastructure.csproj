@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Communications\" />
+    <Folder Include="Upload\" />
+    <Folder Include="Persistence\Configurations\" />
+    <Folder Include="Security\" />
+    <Folder Include="Persistence\Repositories\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PocketTrack.Application\PocketTrack.Application.csproj" />
+    <ProjectReference Include="..\PocketTrack.Domain\PocketTrack.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
