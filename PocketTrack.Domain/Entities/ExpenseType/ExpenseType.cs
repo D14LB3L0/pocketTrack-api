@@ -6,5 +6,9 @@ namespace PocketTrack.Domain.Entities.ExpenseTypes
     {
         public int Id { get; set; }
         public required ExpenseTypeName Name { get; set; }
+
+        public bool? IsActive { get; set; }
+
+        public DateTime? CreatedAt { get; set; }
     }
 }

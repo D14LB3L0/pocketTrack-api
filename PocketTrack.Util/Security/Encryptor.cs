@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace EcoTrueke.Util.Security
+namespace PocketTrack.Util.Security
 {
     public static class Encryptor
     {

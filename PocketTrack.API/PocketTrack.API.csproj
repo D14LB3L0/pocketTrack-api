@@ -11,17 +11,17 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.13.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Responses\" />
     <Folder Include="Requests\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PocketTrack.Application\PocketTrack.Application.csproj" />
     <ProjectReference Include="..\PocketTrack.Infrastructure\PocketTrack.Infrastructure.csproj" />
+    <ProjectReference Include="..\PocketTrack.Services\PocketTrack.Services.csproj" />
   </ItemGroup>
 
 </Project>

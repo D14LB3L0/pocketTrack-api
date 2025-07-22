@@ -19,10 +19,20 @@ namespace PocketTrack.Infrastructure.Persistence.Configurations
             builder.Property(e => e.Amount)
                    .HasPrecision(18, 2);
 
-            builder.Property(e => e.IsDeleted);
+            builder.Property(e => e.IsDeleted)
+                   .HasColumnName("is_deleted");
 
-            builder.Property(e => e.CreatedAt);
-            builder.Property(e => e.UpdatedAt);
+            builder.Property(e => e.CreatedAt)
+                   .HasColumnName("created_at");
+
+            builder.Property(e => e.UpdatedAt)
+                   .HasColumnName("updated_at");
+            
+            builder.Property(e => e.SpentAt)
+                   .HasColumnName("spent_at");
+
+            builder.Property(e => e.ExpenseTypeId)
+                   .HasColumnName("expense_type_id");
 
             builder.HasOne(e => e.ExpenseType)
                    .WithMany(et => et.Expenses)

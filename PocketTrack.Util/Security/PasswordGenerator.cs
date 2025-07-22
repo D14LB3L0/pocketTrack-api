@@ -1,4 +1,4 @@
-﻿namespace EcoTrueke.Infrastructure.Security
+﻿namespace PocketTrack.Infrastructure.Security
 {
     public static class PasswordGenerator
     {

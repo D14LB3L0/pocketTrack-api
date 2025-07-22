@@ -4,7 +4,7 @@ using Newtonsoft.Json.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 
-namespace EcoTrueke.Services.API
+namespace PocketTrack.Services.API
 {
     public class APIClient
     {

@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace EcoTrueke.Services.API
+namespace PocketTrack.Services.API
 {
     public class AuthorizationHeader
     {

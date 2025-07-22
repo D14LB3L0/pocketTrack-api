@@ -1,17 +1,20 @@
-﻿using Newtonsoft.Json;
-
-namespace EcoTrueke.Services.API
+﻿namespace PocketTrack.Services.API
 {
-    public class Result
+    public class Result<T>
     {
         public bool Success => Code == OK;
         public int Code { get; set; }
-        public string Type { get; set; }
-        public string Message { get; set; }
-        public string? Data { get; set; }
-        public Result()
+        public string Message { get; set; } = string.Empty;
+        public T? Data { get; set; }
+
+        public static Result<T> Ok(T data, string message = "Success")
         {
-            Code = OK;
+            return new Result<T> { Code = OK, Data = data, Message = message };
+        }
+
+        public static Result<T> Fail(string message, int code = SERVER_ERROR)
+        {
+            return new Result<T> { Code = code, Message = message };
         }
 
         //Codes
@@ -22,12 +25,5 @@ namespace EcoTrueke.Services.API
         public const int NOT_FOUND = 404;
         public const int UNPROCESSABLE_ENTITY = 422;
         public const int SERVER_ERROR = 500;
-        public const string MENSAJE_CAMBIOS_EXITO = "Los cambios han sido guardados con éxito.";
-
-        //Extensions
-        public static implicit operator Result(string sResult)
-        {
-            return JsonConvert.DeserializeObject<Result>(sResult);
-        }
     }
 }
