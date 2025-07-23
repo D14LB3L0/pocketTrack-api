@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PocketTrack.Domain.Entities.ExpenseTypes;
+using PocketTrack.Domain.Entities.ExpenseType;
 using PocketTrack.Domain.Interfaces;
 using PocketTrack.Infrastructure.Mappers;
 

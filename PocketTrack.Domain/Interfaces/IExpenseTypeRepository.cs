@@ -1,4 +1,4 @@
-﻿using PocketTrack.Domain.Entities.ExpenseTypes;
+﻿using PocketTrack.Domain.Entities.ExpenseType;
 
 namespace PocketTrack.Domain.Interfaces
 {

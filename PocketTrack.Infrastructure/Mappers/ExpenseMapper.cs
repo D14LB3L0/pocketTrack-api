@@ -1,5 +1,6 @@
 ﻿using PocketTrack.Domain.Entities.Expense.ValueObjects;
-using PocketTrack.Domain.Entities.Expenses;
+using PocketTrack.Domain.Entities.Expense;
+using PocketTrack.Domain.Events;
 
 namespace PocketTrack.Infrastructure.Mappers
 {
@@ -26,7 +27,7 @@ namespace PocketTrack.Infrastructure.Mappers
 
         public static Persistence.Models.Expense ToModel(Expense entity)
         {
-            return new Persistence.Models.Expense
+            var model = new Persistence.Models.Expense
             {
                 Id = entity.Id,
                 Description = entity.Description.Value,
@@ -37,6 +38,16 @@ namespace PocketTrack.Infrastructure.Mappers
                 UpdatedAt = entity.UpdatedAt,
                 IsDeleted = entity.IsDeleted
             };
+
+            if (entity.DomainEvents.Any() && model is IHasDomainEvents modelWithEvents)
+            {
+                foreach (var domainEvent in entity.DomainEvents)
+                {
+                    modelWithEvents.AddDomainEvent(domainEvent);
+                }
+            }
+
+            return model;
         }
     }
 }

@@ -37,6 +37,9 @@ namespace PocketTrack.Infrastructure.Persistence.Configurations
             builder.HasOne(e => e.ExpenseType)
                    .WithMany(et => et.Expenses)
                    .HasForeignKey(e => e.ExpenseTypeId);
+
+            builder.Ignore(e => e.DomainEvents);
+
         }
     }
 }

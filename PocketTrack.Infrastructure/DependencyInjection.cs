@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PocketTrack.Application.UseCases.ExpenseType;
+using PocketTrack.Application.Interfaces;
 using PocketTrack.Domain.Interfaces;
 using PocketTrack.Infrastructure.Persistence;
 using PocketTrack.Infrastructure.Persistence.Repositories;
@@ -14,8 +14,7 @@ namespace PocketTrack.Infrastructure
         {
             services
                 .AddMySQLDb(configuration)
-                .AddRepositories()
-                .AddUseCases();
+                .AddRepositories();
 
             return services;
         }
@@ -27,21 +26,17 @@ namespace PocketTrack.Infrastructure
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
+            services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<ApplicationDbContext>());
+
             return services;
         }
+
         private static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             // Expense Types
             services.AddScoped<IExpenseTypeRepository, ExpenseTypeRepository>();
+            services.AddScoped<IExpenseRepository, ExpenseRepository>();
             
-            return services;
-        }
-        
-        private static IServiceCollection AddUseCases(this IServiceCollection services)
-        {
-            // Expense Types
-            services.AddScoped<GetAllExpenseTypesUseCase>();
-
             return services;
         }
     }

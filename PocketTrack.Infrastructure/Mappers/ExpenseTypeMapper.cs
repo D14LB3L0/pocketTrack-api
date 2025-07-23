@@ -1,5 +1,5 @@
 ﻿using PocketTrack.Domain.Entities.ExpenseType.ValueObjects;
-using PocketTrack.Domain.Entities.ExpenseTypes;
+using PocketTrack.Domain.Entities.ExpenseType;
 
 namespace PocketTrack.Infrastructure.Mappers
 {

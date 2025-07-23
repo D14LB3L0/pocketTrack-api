@@ -1,3 +1,4 @@
+using PocketTrack.Application;
 using PocketTrack.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,19 +11,20 @@ builder.Services.AddCors(options =>
         policy
             .AllowAnyHeader()
             .AllowAnyMethod()
-            .SetIsOriginAllowed(_ => true) 
+            .SetIsOriginAllowed(_ => true)
             .AllowCredentials();           // Necesario para SignalR
     });
 });
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
 
 // Dependency Injection
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication(builder.Configuration);
+
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
 

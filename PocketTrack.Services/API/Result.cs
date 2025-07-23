@@ -25,5 +25,6 @@
         public const int NOT_FOUND = 404;
         public const int UNPROCESSABLE_ENTITY = 422;
         public const int SERVER_ERROR = 500;
+
     }
 }

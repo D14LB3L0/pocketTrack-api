@@ -1,6 +1,6 @@
 ﻿using PocketTrack.Domain.Entities.ExpenseType.ValueObjects;
 
-namespace PocketTrack.Domain.Entities.ExpenseTypes
+namespace PocketTrack.Domain.Entities.ExpenseType
 {
     public class ExpenseType
     {

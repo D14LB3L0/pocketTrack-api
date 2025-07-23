@@ -6,7 +6,7 @@
 
         public ExpenseAmount(decimal value)
         {
-            if (value < 0)
+            if (value <= 0)
                 throw new ArgumentException("The amount cannot be negative.");
 
             if (decimal.Round(value, 2) != value)

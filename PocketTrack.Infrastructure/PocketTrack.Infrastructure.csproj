@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Communications\" />
-    <Folder Include="Persistence\Models\" />
     <Folder Include="Upload\" />
     <Folder Include="Security\" />
   </ItemGroup>
