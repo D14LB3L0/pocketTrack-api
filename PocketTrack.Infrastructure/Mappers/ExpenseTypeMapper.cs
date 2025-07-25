@@ -1,5 +1,4 @@
-﻿using PocketTrack.Domain.Entities.ExpenseType.ValueObjects;
-using PocketTrack.Domain.Entities.ExpenseType;
+﻿using PocketTrack.Domain.Entities.ExpenseType;
 
 namespace PocketTrack.Infrastructure.Mappers
 {
@@ -10,7 +9,7 @@ namespace PocketTrack.Infrastructure.Mappers
             return new ExpenseType
             {
                 Id = model.Id,
-                Name = new ExpenseTypeName(model.Name),
+                Name = model.Name,
             };
         }
 
@@ -19,7 +18,7 @@ namespace PocketTrack.Infrastructure.Mappers
             return new Persistence.Models.ExpenseType
             {
                 Id = entity.Id,
-                Name = entity.Name.Value.ToString()
+                Name = entity.Name
             };
         }
     }

@@ -23,13 +23,7 @@ namespace PocketTrack.API.Controllers
             {
                 var result = await _useCase.ExecuteAsync();
 
-                var response = result.Select(et => new ExpenseTypeDto
-                {
-                    Id = et.Id,
-                    Name = et.Name,
-                }).ToList();
-
-                return Ok(Result<List<ExpenseTypeDto>>.Ok(response));
+                return Ok(Result<List<ExpenseTypeDto>>.Ok(result));
             }
             catch (Exception ex)
             {

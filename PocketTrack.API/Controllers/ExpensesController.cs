@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PocketTrack.API.Requests.Expense;
 using PocketTrack.Application.UseCases.Expense;
 using PocketTrack.Application.UseCases.Expense.Command;
 
@@ -17,19 +16,11 @@ namespace PocketTrack.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddExpense([FromBody] AddExpenseRequest request)
+        public async Task<IActionResult> AddExpense([FromBody] AddExpenseCommand command)
         {
            
             try
             {
-                var command = new AddExpenseCommand
-                {
-                    Description = request.Description!,
-                    Amount = request.Amount!.Value,
-                    ExpenseTypeId = request.ExpenseTypeId!.Value,
-                    SpentAt = request.SpentAt!.Value
-                };
-
                 await _addExpenseUseCase.ExecuteAsync(command);
 
                 return Ok();

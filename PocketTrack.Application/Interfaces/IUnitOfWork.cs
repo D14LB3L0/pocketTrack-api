@@ -4,6 +4,5 @@
     {
         Task<int> SaveChangesWithEventsAsync(CancellationToken cancellationToken = default);
         Task<ITransaction> BeginTransactionAsync(CancellationToken cancellationToken = default);
-
     }
 }
