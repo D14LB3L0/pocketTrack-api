@@ -35,6 +35,7 @@ namespace PocketTrack.Application
 
             // Expense
             services.AddScoped<AddExpenseUseCase>();
+            services.AddScoped<GetAllExpenseUseCase>();
 
             return services;
         }

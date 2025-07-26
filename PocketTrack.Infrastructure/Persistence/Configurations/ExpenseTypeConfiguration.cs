@@ -8,6 +8,8 @@ namespace PocketTrack.Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<ExpenseType> builder)
         {
+            builder.HasQueryFilter(e => e.IsActive == true);
+
             builder.ToTable("expense_types");
 
             builder.HasKey(et => et.Id);

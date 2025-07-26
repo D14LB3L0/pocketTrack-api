@@ -8,6 +8,8 @@ namespace PocketTrack.Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Expense> builder)
         {
+            builder.HasQueryFilter(e => e.IsDeleted == false);
+
             builder.ToTable("expenses");
 
             builder.HasKey(e => e.Id);

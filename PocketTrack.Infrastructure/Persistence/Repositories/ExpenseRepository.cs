@@ -1,4 +1,5 @@
-﻿using PocketTrack.Domain.Entities.Expense;
+﻿using Microsoft.EntityFrameworkCore;
+using PocketTrack.Domain.Entities.Expense;
 using PocketTrack.Domain.Interfaces;
 using PocketTrack.Infrastructure.Mappers;
 
@@ -20,5 +21,15 @@ namespace PocketTrack.Infrastructure.Persistence.Repositories
             await _context.Expenses.AddAsync(entity);
         }
 
+        public async Task<List<Expense>> GetAllAsync()
+        {
+            var entities = await _context.Expenses
+                .Include(e => e.ExpenseType)
+                .ToListAsync();
+
+            return entities
+                .Select(ExpenseMapper.ToDomain)
+                .ToList();
+        }
     }
 }

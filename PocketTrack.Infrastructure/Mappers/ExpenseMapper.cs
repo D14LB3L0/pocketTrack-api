@@ -36,7 +36,7 @@ namespace PocketTrack.Infrastructure.Mappers
                 SpentAt = entity.SpentAt,
                 CreatedAt = entity.CreatedAt,
                 UpdatedAt = entity.UpdatedAt,
-                IsDeleted = entity.IsDeleted
+                IsDeleted = entity.IsDeleted,
             };
 
             if (entity.DomainEvents.Any() && model is IHasDomainEvents modelWithEvents)

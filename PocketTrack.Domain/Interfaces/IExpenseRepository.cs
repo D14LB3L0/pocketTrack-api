@@ -4,6 +4,7 @@ namespace PocketTrack.Domain.Interfaces
 {
     public interface IExpenseRepository
     {
+        Task<List<Expense>> GetAllAsync();
         Task AddAsync(Expense expense);
     }
 }
