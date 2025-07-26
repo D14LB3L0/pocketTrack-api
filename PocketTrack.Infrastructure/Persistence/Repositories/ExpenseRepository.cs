@@ -31,5 +31,28 @@ namespace PocketTrack.Infrastructure.Persistence.Repositories
                 .Select(ExpenseMapper.ToDomain)
                 .ToList();
         }
+
+        public async Task<Expense> GetById(int id)
+        {
+            var entity = await _context.Expenses.FindAsync(id);
+
+            if (entity == null)
+                throw new KeyNotFoundException($"Expense with {id} not found");
+
+            return ExpenseMapper.ToDomain(entity);
+        }
+
+        public void Update(Expense expense)
+        {
+            var entity = ExpenseMapper.ToModel(expense);
+
+            var local = _context.Expenses.Local.FirstOrDefault(e => e.Id == entity.Id);
+            if (local != null)
+            {
+                _context.Entry(local).State = EntityState.Detached;
+            }
+
+            _context.Expenses.Update(entity);
+        }
     }
 }

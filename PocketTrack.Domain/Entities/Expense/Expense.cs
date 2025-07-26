@@ -44,10 +44,16 @@
             ExpenseTypeId = expenseTypeId;
             Amount = amount;
             SpentAt = spentAt;
-            CreatedAt = DateTime.UtcNow;
-            IsDeleted = false;
 
             AddDomainEvent(new ExpenseCreatedEvent(this));
+        }
+
+        public void Update(ExpenseDescription description, int expenseTypeId, ExpenseAmount amount, DateOnly spentAt)
+        {
+            Description = description;
+            ExpenseTypeId = expenseTypeId;
+            Amount = amount;
+            SpentAt = spentAt;
         }
 
         public Expense() { }

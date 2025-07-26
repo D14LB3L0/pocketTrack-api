@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PocketTrack.API.Requests;
 using PocketTrack.Application.DTOs.Expense;
 using PocketTrack.Application.UseCases.Expense;
 using PocketTrack.Application.UseCases.Expense.Command;
@@ -12,11 +13,13 @@ namespace PocketTrack.API.Controllers
     {
         private readonly AddExpenseUseCase _addExpenseUseCase;
         private readonly GetAllExpenseUseCase _getAllExpenseUseCase;
+        private readonly UpdateExpenseUseCase _updateExpenseUseCase;
 
-        public ExpensesController(AddExpenseUseCase addExpenseUseCase, GetAllExpenseUseCase getAllExpenseUseCase)
+        public ExpensesController(AddExpenseUseCase addExpenseUseCase, GetAllExpenseUseCase getAllExpenseUseCase, UpdateExpenseUseCase updateExpenseUseCase)
         {
             _addExpenseUseCase = addExpenseUseCase;
             _getAllExpenseUseCase = getAllExpenseUseCase;
+            _updateExpenseUseCase= updateExpenseUseCase;
         }
 
         [HttpGet]
@@ -35,12 +38,50 @@ namespace PocketTrack.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddExpense([FromBody] AddExpenseCommand command)
+        public async Task<IActionResult> AddExpense([FromBody] AddExpenseRequest request)
         {
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
             try
             {
+                var command = new AddExpenseCommand
+                {
+                    Description = request.Description!,
+                    Amount = request.Amount!.Value,
+                    ExpenseTypeId = request.ExpenseTypeId!.Value,
+                    SpentAt = request.SpentAt!.Value
+                };
+
                 await _addExpenseUseCase.ExecuteAsync(command);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = ex.Message });
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateExpense([FromBody] UpdateExpenseRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                var expenseDto = new UpdateExpenseDto
+                {
+                    Id = request.Id!.Value,
+                    Description = request.Description!,
+                    Amount = request.Amount!.Value,
+                    SpentAt = request.SpentAt!.Value,
+                    ExpenseTypeId= request.ExpenseTypeId!.Value,    
+                };
+
+                await _updateExpenseUseCase.ExecuteAsync(expenseDto);
 
                 return Ok();
             }
