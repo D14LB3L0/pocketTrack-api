@@ -44,6 +44,7 @@
             ExpenseTypeId = expenseTypeId;
             Amount = amount;
             SpentAt = spentAt;
+            CreatedAt = DateTime.UtcNow;
 
             AddDomainEvent(new ExpenseCreatedEvent(this));
         }
@@ -54,6 +55,7 @@
             ExpenseTypeId = expenseTypeId;
             Amount = amount;
             SpentAt = spentAt;
+            UpdatedAt = DateTime.UtcNow;
         }
 
         public Expense() { }
