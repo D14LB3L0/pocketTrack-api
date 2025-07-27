@@ -54,5 +54,16 @@ namespace PocketTrack.Infrastructure.Persistence.Repositories
 
             _context.Expenses.Update(entity);
         }
+
+        public async Task DeleteAsync(int id)
+        {
+            var expense = await _context.Expenses.FirstOrDefaultAsync(e => e.Id == id);
+
+            if (expense == null)
+                throw new KeyNotFoundException($"Expense with {id} not found");
+
+            expense.IsDeleted = true;
+            expense.UpdatedAt = DateTime.UtcNow;
+        }
     }
 }

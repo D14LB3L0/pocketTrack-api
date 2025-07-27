@@ -14,12 +14,14 @@ namespace PocketTrack.API.Controllers
         private readonly AddExpenseUseCase _addExpenseUseCase;
         private readonly GetAllExpenseUseCase _getAllExpenseUseCase;
         private readonly UpdateExpenseUseCase _updateExpenseUseCase;
+        private readonly DeleteExpenseUseCase _deleteExpenseUseCase;
 
-        public ExpensesController(AddExpenseUseCase addExpenseUseCase, GetAllExpenseUseCase getAllExpenseUseCase, UpdateExpenseUseCase updateExpenseUseCase)
+        public ExpensesController(AddExpenseUseCase addExpenseUseCase, GetAllExpenseUseCase getAllExpenseUseCase, UpdateExpenseUseCase updateExpenseUseCase, DeleteExpenseUseCase deleteExpenseUseCase)
         {
             _addExpenseUseCase = addExpenseUseCase;
             _getAllExpenseUseCase = getAllExpenseUseCase;
-            _updateExpenseUseCase= updateExpenseUseCase;
+            _updateExpenseUseCase = updateExpenseUseCase;
+            _deleteExpenseUseCase = deleteExpenseUseCase;
         }
 
         [HttpGet]
@@ -78,10 +80,25 @@ namespace PocketTrack.API.Controllers
                     Description = request.Description!,
                     Amount = request.Amount!.Value,
                     SpentAt = request.SpentAt!.Value,
-                    ExpenseTypeId= request.ExpenseTypeId!.Value,    
+                    ExpenseTypeId = request.ExpenseTypeId!.Value,
                 };
 
                 await _updateExpenseUseCase.ExecuteAsync(expenseDto);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = ex.Message });
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteExpense(int id)
+        {
+            try
+            {
+                await _deleteExpenseUseCase.ExecuteAsync(id);
 
                 return Ok();
             }
