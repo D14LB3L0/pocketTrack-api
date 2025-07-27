@@ -45,6 +45,7 @@
             Amount = amount;
             SpentAt = spentAt;
             CreatedAt = DateTime.UtcNow;
+            IsDeleted = false;
 
             AddDomainEvent(new ExpenseCreatedEvent(this));
         }
