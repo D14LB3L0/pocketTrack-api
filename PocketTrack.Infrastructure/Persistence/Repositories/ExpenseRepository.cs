@@ -65,5 +65,11 @@ namespace PocketTrack.Infrastructure.Persistence.Repositories
             expense.IsDeleted = true;
             expense.UpdatedAt = DateTime.UtcNow;
         }
+
+        public async Task<decimal> GetTotalExpensesAsync(CancellationToken cancellationToken = default)
+        {
+            return await _context.Expenses
+                  .SumAsync(e => e.Amount, cancellationToken);
+        }
     }
 }

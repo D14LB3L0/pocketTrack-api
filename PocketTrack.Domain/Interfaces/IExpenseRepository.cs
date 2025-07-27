@@ -9,5 +9,7 @@ namespace PocketTrack.Domain.Interfaces
         Task AddAsync(Expense expense);
         void Update(Expense expense);
         Task DeleteAsync(int id);
+
+        Task<decimal> GetTotalExpensesAsync(CancellationToken cancellationToken = default);
     }
 }
